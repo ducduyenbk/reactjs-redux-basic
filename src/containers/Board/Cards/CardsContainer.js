@@ -41,14 +41,7 @@ const listTarget = {
   }
 };
 
-@DropTarget('list', listTarget, connectDragSource => ({
-  connectDropTarget: connectDragSource.dropTarget(),
-}))
-@DragSource('list', listSource, (connectDragSource, monitor) => ({
-  connectDragSource: connectDragSource.dragSource(),
-  isDragging: monitor.isDragging()
-}))
-export default class CardsContainer extends Component {
+class CardsContainer extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     connectDragSource: PropTypes.func.isRequired,
@@ -83,3 +76,14 @@ export default class CardsContainer extends Component {
     ));
   }
 }
+
+CardsContainer = DropTarget('list', listTarget, connectDragSource => ({
+  connectDropTarget: connectDragSource.dropTarget(),
+}))(CardsContainer);
+
+CardsContainer = DragSource('list', listSource, (connectDragSource, monitor) => ({
+  connectDragSource: connectDragSource.dragSource(),
+  isDragging: monitor.isDragging()
+}))(CardsContainer);
+
+export default CardsContainer;

@@ -19,9 +19,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ListsActions, dispatch);
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
-@DragDropContext(HTML5Backend)
-export default class Board extends Component {
+class Board extends Component {
   static propTypes = {
     getLists: PropTypes.func.isRequired,
     moveCard: PropTypes.func.isRequired,
@@ -120,3 +118,8 @@ export default class Board extends Component {
     );
   }
 }
+
+Board = DragDropContext(HTML5Backend)(Board);
+Board = connect(mapStateToProps, mapDispatchToProps)(Board);
+
+export default Board;

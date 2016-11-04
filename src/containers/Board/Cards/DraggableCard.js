@@ -55,8 +55,7 @@ function collectDragSource(connectDragSource, monitor) {
   };
 }
 
-@DragSource('card', cardSource, collectDragSource, OPTIONS)
-export default class CardComponent extends Component {
+class CardComponent extends Component {
   static propTypes = {
     item: PropTypes.object,
     connectDragSource: PropTypes.func.isRequired,
@@ -83,3 +82,5 @@ export default class CardComponent extends Component {
     );
   }
 }
+
+export default DragSource('card', cardSource, collectDragSource, OPTIONS)(CardComponent);

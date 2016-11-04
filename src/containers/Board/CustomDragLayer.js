@@ -36,14 +36,7 @@ function getItemStyles(props) {
   };
 }
 
-@DragLayer((monitor) => ({
-  item: monitor.getItem(),
-  itemType: monitor.getItemType(),
-  initialOffset: monitor.getInitialSourceClientOffset(),
-  currentOffset: monitor.getSourceClientOffset(),
-  isDragging: monitor.isDragging()
-}))
-export default class CustomDragLayer extends Component {
+class CustomDragLayer extends Component {
   static propTypes = {
     item: PropTypes.object,
     itemType: PropTypes.string,
@@ -87,3 +80,11 @@ export default class CustomDragLayer extends Component {
     );
   }
 }
+
+export default DragLayer((monitor) => ({
+  item: monitor.getItem(),
+  itemType: monitor.getItemType(),
+  initialOffset: monitor.getInitialSourceClientOffset(),
+  currentOffset: monitor.getSourceClientOffset(),
+  isDragging: monitor.isDragging()
+}))(CustomDragLayer);
