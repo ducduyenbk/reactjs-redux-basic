@@ -7,8 +7,6 @@ import { routes } from './routes';
 
 import configureStore from './store/configureStore';
 
-import './assets/temp.styl';
-
 const store = configureStore();
 const app = document.getElementById('app');
 

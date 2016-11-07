@@ -1,5 +1,3 @@
-import { Record } from 'immutable';
-
 import {
   GET_LISTS,
   GET_LISTS_START,
@@ -8,25 +6,25 @@ import {
   TOGGLE_DRAGGING
 } from '../actions/lists';
 
-/* eslint-disable new-cap */
-const InitialState = Record({
+const initialState = {
   isFetching: false,
   lists: [],
   isDragging: false
-});
-/* eslint-enable new-cap */
-const initialState = new InitialState;
+};
 
 
 export default function lists(state = initialState, action) {
   switch (action.type) {
     case GET_LISTS_START:
-      return state.set('isFetching', true);
+      var oReturn = {... state};
+      oReturn.isFetching = true;
+      return oReturn;
     case GET_LISTS:
-      return state.withMutations((ctx) => {
-        ctx.set('isFetching', false)
-            .set('lists', action.lists);
-      });
+      var oReturn = {... state};
+      oReturn.isFetching = false;
+      oReturn.lists = action.lists;
+      return oReturn;
+
     case MOVE_CARD: {
       const newLists = [...state.lists];
       const { lastX, lastY, nextX, nextY } = action;
@@ -38,9 +36,10 @@ export default function lists(state = initialState, action) {
         // delete element from old place
         newLists[lastX].cards.splice(lastY, 1);
       }
-      return state.withMutations((ctx) => {
-        ctx.set('lists', newLists);
-      });
+
+      var oReturn = {... state};
+      oReturn.lists = newLists;
+      return oReturn;
     }
     case MOVE_LIST: {
       const newLists = [...state.lists];
@@ -49,12 +48,15 @@ export default function lists(state = initialState, action) {
 
       newLists.splice(nextX, 0, t);
 
-      return state.withMutations((ctx) => {
-        ctx.set('lists', newLists);
-      });
+      var oReturn = {... state};
+      oReturn.lists = newLists;
+      return oReturn;
     }
+    
     case TOGGLE_DRAGGING: {
-      return state.set('isDragging', action.isDragging);
+      var oReturn = {... state};
+      oReturn.isDragging = action.isDragging;
+      return oReturn;
     }
     default:
       return state;

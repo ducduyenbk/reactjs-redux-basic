@@ -6,9 +6,11 @@ export const MOVE_CARD = 'MOVE_CARD';
 export const MOVE_LIST = 'MOVE_LIST';
 export const TOGGLE_DRAGGING = 'TOGGLE_DRAGGING';
 
+
 export function getLists(quantity) {
   return dispatch => {
-    dispatch({ type: GET_LISTS_START, quantity });
+    dispatch({ type: GET_LISTS_START });
+
     setTimeout(() => {
       const lists = [];
       let count = 0;
@@ -30,9 +32,9 @@ export function getLists(quantity) {
           cards
         });
       }
+
       dispatch({ type: GET_LISTS, lists, isFetching: true });
-    }, 1000); // fake delay
-    dispatch({ type: GET_LISTS_START, isFetching: false });
+    }, 4000); // fake delay
   };
 }
 
@@ -49,7 +51,11 @@ export function moveCard(lastX, lastY, nextX, nextY) {
 }
 
 export function toggleDragging(isDragging) {
-  return (dispatch) => {
-    dispatch({ type: TOGGLE_DRAGGING, isDragging });
-  };
+  // return (dispatch) => {
+  //   dispatch({ type: TOGGLE_DRAGGING, isDragging });
+  // };
+
+  return {
+    type: TOGGLE_DRAGGING, isDragging
+  }
 }

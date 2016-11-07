@@ -21,8 +21,8 @@ module.exports = {
               }
           },
           {
-            test: /(\.css|\.styl)$/,
-            loader: 'style-loader!css-loader!stylus-loader'
+            test: /(\.css)$/,
+            loader: 'style-loader!css-loader'
           },
           {
             test: /\.(jpg|jpeg|gif|png|ico|ttf|otf|eot|svg|woff|woff2)(\?[a-z0-9]+)?$/,
@@ -31,7 +31,7 @@ module.exports = {
       ]
   },
   resolve: {
-      extensions: ['', '.js', '.jsx', '.css', '.styl'],
+      extensions: ['', '.js', '.jsx', '.css'],
       alias: {
           react: path.resolve(__dirname, 'node_modules', 'react'),
           'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom')
